@@ -1,0 +1,60 @@
+@import '../../assets/font/stylesheet.css';
+@import '../../assets/less/master.less';
+@font: 'sansserif';
+.block-intro{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 2s;
+    &.hide{
+        opacity: 0;
+        pointer-events: none;
+        &:before{
+            backdrop-filter: blur(0px) saturate(0%);
+        }
+    }
+
+    &:before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        backdrop-filter: blur(20px) saturate(80%);
+        transition: all 2s
+    }
+    ul{
+        height: 100%;
+        width: 100%;
+
+        li{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-transform: uppercase;
+            font-size: 60px;
+            letter-spacing: 10px;
+            font-family: @font;
+            white-space: nowrap;
+            transform: translate3d(1, 1, 1);
+            .char{
+                display: inline-block;
+                position: relative;
+                white-space: nowrap;
+            }
+
+            @media @mobile {
+                font-size: 30px;
+            }
+        }
+
+     
+    }
+}

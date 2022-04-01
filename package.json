@@ -1,0 +1,32 @@
+{
+  "name": "furidays",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.2.9",
+    "bowser": "^2.11.0",
+    "core-js": "^3.19.3",
+    "dat.gui": "^0.7.7",
+    "event-emitter": "^0.3.5",
+    "gl-matrix": "^3.4.3",
+    "gsap": "^3.9.1",
+    "less": "^4.1.2",
+    "nuxt": "^2.15.8",
+    "ogl": "^0.0.78",
+    "raw-loader": "^4.0.2",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "less": "^4.1.1",
+    "less-loader": "^7.3.0"
+  }
+}
