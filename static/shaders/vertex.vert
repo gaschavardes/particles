@@ -18,7 +18,8 @@ void main() {
     vec4 mPos = modelMatrix * vec4(pos, 1.0);
     // add some movement in world space
     float t = uTime * 0.6;
-    // mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
+    mPos.x -= 2.;
+    mPos.y -= 1.;
     // mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
     // mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
     
