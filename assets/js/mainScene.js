@@ -53,7 +53,7 @@ class Scene {
       fov: 15
     })
    
-    this.camera.position.set(0, 0, 10)
+    this.camera.position.set(0, 0, 5)
     this.camera.lookAt([0, 0, 0])
     this.controls = new Orbit(this.camera);
     this.scene = new Transform()

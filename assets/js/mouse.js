@@ -102,8 +102,8 @@ class Mouse {
 
       this.prevDist = this.distance
     } else {
-      this.cursor[0] = (event.clientX / this.screenWidth - 0.5) * 2
-      this.cursor[1] = (event.clientY / this.screenHeight - 0.5) * 2
+      this.cursor[0] = (event.clientX / this.screenWidth)
+      this.cursor[1] = (event.clientY / this.screenHeight)
       this.cursorReel[0] = event.clientX
       this.cursorReel[1] = event.clientY
       // this.currentEvent = event
