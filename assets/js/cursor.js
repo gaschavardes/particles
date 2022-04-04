@@ -6,8 +6,8 @@ export default class TouchTexture {
 	constructor(parent) {
 		this.parent = parent;
 		this.size = 64;
-		this.maxAge = 10;
-		this.radius = 0.15;
+		this.maxAge = 100;
+		this.radius = 0.1;
 		this.trail = [];
 
 		this.initTexture();
@@ -88,13 +88,13 @@ export default class TouchTexture {
 		intensity *= point.force;
 
 		const radius = this.size * this.radius * intensity;
-		const grd = this.ctx.createRadialGradient(pos.x, pos.y, radius * 0.25, pos.x, pos.y, radius);
+		const grd = this.ctx.createRadialGradient(pos.x, pos.y, radius * 0.25 , pos.x, pos.y, radius );
 		grd.addColorStop(0, `rgba(255, 255, 255, 0.2)`);
 		grd.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
 
 		this.ctx.beginPath();
 		this.ctx.fillStyle = grd;
-		this.ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+		this.ctx.arc(pos.x, pos.y, radius / (point.age * 0.05), 0, Math.PI * 2);
 		this.ctx.fill();
 	}
 }

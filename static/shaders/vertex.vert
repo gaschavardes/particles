@@ -13,8 +13,8 @@ uniform vec2 uTextureSize;
 uniform sampler2D uTouch;
 void main() {
     //vRandom = random;
-    vec2 puv = uTextureSize;
     
+
     // positions are 0->1, so make -1->1
     vec3 pos = offsets * 2.0 - 1.0;;
     
@@ -23,13 +23,15 @@ void main() {
     
     // modelMatrix is one of the automatically attached uniforms when using the Mesh class
     vec4 mPos = modelMatrix * vec4(pos, 1.0);
+    vec2 puv = vec2(offsets.x + uWay * 0.25, offsets.y);
+
     // add some movement in world space
 
     float m = texture2D(uTouch, puv).r;
 
     float t = uTime * 0.01;
-    mPos.x += sin(t * random + random) * 0.005 * uFactor + uWay * 0.5 + cos(random) * m * 1.0;
-    mPos.y += sin(t * random + random) * 0.005 * uFactor + sin(random) * m * 1.0;
+    mPos.x += sin(t * random + random) * 0.005 * uFactor + uWay * 0.5 + cos(random) * m * .1;
+    mPos.y += sin(t * random + random) * 0.005 * uFactor + sin(random) * m * .1;
     mPos.z += abs(sin(t * random));
     
     Pos = mPos;

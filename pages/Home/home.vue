@@ -167,9 +167,9 @@ export default {
       console.log('coucou', plane)
       const geometry = new Geometry(this.Scene.gl, {
           position: {size: 3, data: new Float32Array([-0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0])},
-          offsets: { size: 3, data: this.offsets },
-          random: { size: 1, data: this.angles },
-          index: { size: 1, data: this.indices },
+          offsets: { instance: 1, size: 3, data: this.offsets },
+          random: { instance: 1, size: 1, data: this.angles },
+          index: { instance: 1, size: 1, data: this.indices },
       });
       const program = new Program(this.Scene.gl, {
           vertex,
