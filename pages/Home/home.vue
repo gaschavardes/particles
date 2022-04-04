@@ -150,6 +150,8 @@ export default {
 			if (this.originalColors[i * 4 + 4] > 200) {
         this.offsets[j * 3 + 0] = (i % this.width) / this.width;
         this.offsets[j * 3 + 1] = Math.floor(i / this.width)/this.height;
+        this.offsets[j * 3 + 0] = 0
+        this.offsets[j * 3 + 1] = 0
         // console.log(i, (i % this.width), Math.floor(i / this.width))
         this.indices[j] = j;
         this.angles[j] = Math.random() * Math.PI ;
@@ -163,14 +165,16 @@ export default {
   initParticles(name, way) {
     console.log('GL', this.Scene.gl)
       let plane = new Plane(this.Scene.gl)
-      this.planeGeometry = plane.attributes.position
-      console.log('coucou', plane)
-      const geometry = new Geometry(this.Scene.gl, {
-          position: {size: 3, data: new Float32Array([-0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0])},
-          offsets: { size: 3, data: this.offsets },
-          random: { size: 1, data: this.angles },
-          index: { size: 1, data: this.indices },
-      });
+      console.log('coucou', plane.attributes.uv)
+      // const geometry = new Geometry(this.Scene.gl, {
+      //     position: plane.attributes.position,
+      //     uv: plane.attributes.uv,
+      //     //offsets: {instanced: 1, size: 3, data: this.offsets },
+      //     //random: {instanced: 1, size: 1, data: this.angles },
+      //     //index: {instanced: 1, size: 1, data: this.indices },
+      // });
+
+      const geometry =  new Plane(this.Scene.gl)
       const program = new Program(this.Scene.gl, {
           vertex,
           fragment,
@@ -187,10 +191,12 @@ export default {
       });
       console.log(geometry)
       // Make sure mode is gl.POINTS
-      let mesh = new Mesh(this.Scene.gl, { mode: this.Scene.gl.POINTS, geometry, program });
+      let mesh = new Mesh(this.Scene.gl, {geometry, program });
       // let mesh = new Mesh(this.Scene.gl, { geometry, program });
       //console.log(particles, this.Scene, this.Scene.gl.POINTS)
       mesh.setParent(this.Scene.scene)
+      mesh.position.set(0, 0, 0)
+      mesh.scale.set(3, 3, 3)
       this.particlesGroup[this.particlesGroup.length + 1] = mesh
   },
    

@@ -1,7 +1,8 @@
 attribute vec3 position;
 attribute vec3 offsets;
+attribute vec2 uv;
 attribute float random;
-uniform mat4 modelMatrix;
+uniform mat4 modelViewMatrix;
 uniform mat4 viewMatrix;
 uniform float uWay;
 uniform float uFactor;
@@ -11,32 +12,24 @@ varying vec4 vRandom;
 varying vec4 Pos;
 uniform vec2 uTextureSize;
 uniform sampler2D uTouch;
+
+varying vec2 vUv;
 void main() {
-    //vRandom = random;
-    vec2 puv = uTextureSize;
+    vUv = uv;
     
-    // positions are 0->1, so make -1->1
-    vec3 pos = offsets * 2.0 - 1.0;;
+    // copy position so that we can modify the instances
+    vec3 pos = position;
     
-    // Scale towards camera to be more interesting
-    //pos.z *= 10.0;
+    // scale first
+    //pos *= 0.9;
     
-    // modelMatrix is one of the automatically attached uniforms when using the Mesh class
-    vec4 mPos = modelMatrix * vec4(pos, 1.0);
-    // add some movement in world space
-
-    float m = texture2D(uTouch, puv).r;
-
-    float t = uTime * 0.01;
-    mPos.x += sin(t * random + random) * 0.005 * uFactor + uWay * 0.5 + cos(random) * m * 1.0;
-    mPos.y += sin(t * random + random) * 0.005 * uFactor + sin(random) * m * 1.0;
-    mPos.z += abs(sin(t * random));
+    // rotate around y axis
+    //rotate2d(pos.xz, random * 6.28 + 4.0 * uTime * (random - 0.5));
     
-    Pos = mPos;
-    mPos.z *= 0.01;
-    // get the model view position so that we can scale the points off into the distance
-    vec4 mvPos = viewMatrix * mPos;
-    //gl_PointSize = 300.0 / length(mvPos.xyz) * (random + 0.1);
-    gl_PointSize = 300.0 / length(mvPos.xyz);
-    gl_Position = projectionMatrix * mvPos;
+    // rotate around x axis just to add some extra variation
+    //rotate2d(pos.zy, rando * 0.5 * sin(uTime * random.x + random.z * 3.14));
+    
+    //pos += offsets;
+    
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
