@@ -18,7 +18,7 @@ import vertex from '@/static/shaders/vertex.vert'
 
 
 //import RugbyText from '@/static/images/rugbyText.png'
-import Toulouse from '@/static/images/logo.png'
+import Toulouse from '@/static/images/logo2.png'
 import Bristol from '@/static/images/bristol.png'
 import bristolAlpha from '@/static/images/bristolAlpha.png'
 
@@ -77,25 +77,25 @@ export default {
         requestAnimationFrame(() => {
           this.hoverTexture = new Cursor(this)
           console.log('glgl', this.Scene.gl)
-          this.initNull()
-          this.initPoints('bristol', 1)
-          this.initPoints('toulouse', -1)
+          // this.initNull()
+          // this.initPoints('bristol', 1)
+          this.initPoints('toulouse', 0)
         })
       })
     },
 
-    initNull () {
-      const program = new Program(this.Scene.gl, {
-        vertex: vertexNull,
-        fragment: fragmentNull,
-        cullFace: null,
-        transparent: true
-      })
-      const geometry = new Sphere(this.Scene.gl)
-      this.null = new Mesh(this.Scene.gl, { geometry, program })
-      this.null.position.set(0, 0, this.originalPosition)
-      this.null.setParent(this.Scene.scene)
-    },
+    // initNull () {
+    //   const program = new Program(this.Scene.gl, {
+    //     vertex: vertexNull,
+    //     fragment: fragmentNull,
+    //     cullFace: null,
+    //     transparent: true
+    //   })
+    //   const geometry = new Sphere(this.Scene.gl)
+    //   this.null = new Mesh(this.Scene.gl, { geometry, program })
+    //   this.null.position.set(0, 0, this.originalPosition)
+    //   this.null.setParent(this.Scene.scene)
+    // },
 
   initPoints(name, way) {
 
@@ -130,7 +130,7 @@ export default {
     for (let i = 0; i < this.numPoints; i++) {
 
       // console.log(this.originalColors[i * 4 + 4])
-      if (this.originalColors[i * 4 + 4]  > 200) {
+      if (this.originalColors[i * 4 + 4]  > 250) {
         // console.log(this.originalColors[i * 4 + 4])
         this.numVisible++;
       }
@@ -147,16 +147,16 @@ export default {
     let j = 0;
     for (let i = 0; i < this.numPoints; i++) {
       // console.log(this.originalColors[i * 4 + 4])
-			if (this.originalColors[i * 4 + 4] > 200) {
+			if (this.originalColors[i * 4 + 4] > 250) {
         this.offsets[j * 3 + 0] = (i % this.width) / this.width;
         this.offsets[j * 3 + 1] = Math.floor(i / this.width)/this.height;
-        this.offsets[j * 3 + 0] = 0
-        this.offsets[j * 3 + 1] = 0
+        // this.offsets[j * 3 + 0] = 0
+        // this.offsets[j * 3 + 1] = 0
         // console.log(i, (i % this.width), Math.floor(i / this.width))
         this.indices[j] = j;
         this.angles[j] = Math.random() * Math.PI ;
         j++;
-      };
+      }
 		}
     // this.indices.pop()
     this.initParticles(name, way)
@@ -165,16 +165,16 @@ export default {
   initParticles(name, way) {
     console.log('GL', this.Scene.gl)
       let plane = new Plane(this.Scene.gl)
-      console.log('coucou', plane.attributes.uv)
-      // const geometry = new Geometry(this.Scene.gl, {
-      //     position: plane.attributes.position,
-      //     uv: plane.attributes.uv,
-      //     //offsets: {instanced: 1, size: 3, data: this.offsets },
-      //     //random: {instanced: 1, size: 1, data: this.angles },
-      //     //index: {instanced: 1, size: 1, data: this.indices },
-      // });
-
-      const geometry =  new Plane(this.Scene.gl)
+      console.log(this.offsets)
+      const geometry = new Geometry(this.Scene.gl, {
+          position:  {size: 3, data: plane.attributes.position.data},
+          uv: {size: 2, data: plane.attributes.uv.data},
+          index: {size: 1, data: plane.attributes.index.data},
+          offsets: {instanced: 1, size: 3, data: this.offsets },
+          //random: {instanced: 1, size: 1, data: this.angles },
+          //index: {instanced: 1, size: 1, data: this.indices },
+      });
+      //const geometry =  new Plane(this.Scene.gl)
       const program = new Program(this.Scene.gl, {
           vertex,
           fragment,
@@ -189,14 +189,13 @@ export default {
           transparent: true,
           depthTest: false,
       });
-      console.log(geometry)
       // Make sure mode is gl.POINTS
       let mesh = new Mesh(this.Scene.gl, {geometry, program });
       // let mesh = new Mesh(this.Scene.gl, { geometry, program });
       //console.log(particles, this.Scene, this.Scene.gl.POINTS)
       mesh.setParent(this.Scene.scene)
       mesh.position.set(0, 0, 0)
-      mesh.scale.set(3, 3, 3)
+      mesh.scale.set(0.1, 0.1, 0.1)
       this.particlesGroup[this.particlesGroup.length + 1] = mesh
   },
    

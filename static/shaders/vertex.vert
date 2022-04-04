@@ -9,7 +9,7 @@ uniform float uFactor;
 uniform mat4 projectionMatrix;
 uniform float uTime;
 varying vec4 vRandom;
-varying vec4 Pos;
+varying vec3 Pos;
 uniform vec2 uTextureSize;
 uniform sampler2D uTouch;
 
@@ -29,7 +29,7 @@ void main() {
     // rotate around x axis just to add some extra variation
     //rotate2d(pos.zy, rando * 0.5 * sin(uTime * random.x + random.z * 3.14));
     
-    //pos += offsets;
-    
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    pos += offsets;
+    Pos = pos;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
