@@ -80,6 +80,7 @@ export default {
           // this.initNull()
           // this.initPoints('bristol', 1)
           this.initPoints('toulouse', 0)
+           this.initPoints('toulouse', 0)
         })
       })
     },
@@ -127,10 +128,10 @@ export default {
   
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     this.originalColors = Float32Array.from(imgData.data);
-    for (let i = 0; i < this.numPoints; i++) {
+    for (let i = 0; i < this.numPoints; i = i + 2) {
 
       // console.log(this.originalColors[i * 4 + 4])
-      if (this.originalColors[i * 4 + 4]  > 250) {
+      if (this.originalColors[i * 4 + 4]  > 200) {
         // console.log(this.originalColors[i * 4 + 4])
         this.numVisible++;
       }
@@ -145,9 +146,9 @@ export default {
 		this.offsets = new Float32Array(this.numVisible * 3);
 		this.angles = new Float32Array(this.numVisible);
     let j = 0;
-    for (let i = 0; i < this.numPoints; i++) {
+    for (let i = 0; i < this.numPoints; i = i + 2) {
       // console.log(this.originalColors[i * 4 + 4])
-			if (this.originalColors[i * 4 + 4] > 250) {
+			if (this.originalColors[i * 4 + 4] > 200) {
         this.offsets[j * 3 + 0] = (i % this.width) / this.width;
         this.offsets[j * 3 + 1] = Math.floor(i / this.width)/this.height;
         // this.offsets[j * 3 + 0] = 0
