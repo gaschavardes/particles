@@ -19,6 +19,7 @@ export default class TouchTexture {
 		this.canvas = document.createElement('canvas');
         document.documentElement.appendChild(this.canvas)
 		this.canvas.width = this.canvas.height = this.size;
+		
 		this.ctx = this.canvas.getContext('2d');
 		this.ctx.fillStyle = 'black';
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -88,13 +89,13 @@ export default class TouchTexture {
 		intensity *= point.force;
 
 		const radius = this.size * this.radius * intensity;
-		const grd = this.ctx.createRadialGradient(pos.x, pos.y, radius * 0.25 , pos.x, pos.y, radius );
+		const grd = this.ctx.createRadialGradient(pos.x,this.canvas.height - pos.y, radius * 0.25 , pos.x, this.canvas.height - pos.y, radius );
 		grd.addColorStop(0, `rgba(255, 255, 255, 0.2)`);
 		grd.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
 
 		this.ctx.beginPath();
 		this.ctx.fillStyle = grd;
-		this.ctx.arc(pos.x, pos.y, radius / (point.age * 0.05), 0, Math.PI * 2);
+		this.ctx.arc(pos.x, this.canvas.height -pos.y, radius / (point.age * 0.05), 0, Math.PI * 2);
 		this.ctx.fill();
 	}
 }
