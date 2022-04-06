@@ -1,5 +1,6 @@
 attribute vec3 position;
 attribute vec3 offsets;
+attribute float index;
 attribute float random;
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -9,7 +10,7 @@ uniform mat4 projectionMatrix;
 uniform float uTime;
 varying vec4 vRandom;
 varying vec4 Pos;
-uniform vec2 uTextureSize;
+uniform float uTextureSize;
 uniform sampler2D uTouch;
 void main() {
     //vRandom = random;
@@ -21,17 +22,19 @@ void main() {
     // Scale towards camera to be more interesting
     //pos.z *= 10.0;
     
+    vec2 rightUv = offsets.xy * (1. - uTextureSize);
+
     // modelMatrix is one of the automatically attached uniforms when using the Mesh class
     vec4 mPos = modelMatrix * vec4(pos, 1.0);
-    vec2 puv = vec2(offsets.x + uWay * 0.25, offsets.y);
+    vec2 puv = vec2((offsets.x + uWay * 0.25), offsets.y );
 
     // add some movement in world space
 
     float m = texture2D(uTouch, puv).r;
 
     float t = uTime * 0.01;
-    mPos.x += sin(t * random + random) * 0.005 * uFactor + uWay * 0.5 + cos(random) * m * .1;
-    mPos.y += sin(t * random + random) * 0.005 * uFactor + sin(random) * m * .1;
+    mPos.x += sin(t * random + random) * 0.005 * uFactor + uWay * 0.5 + cos(random) * m * random * 0.03;
+    mPos.y += sin(t * random + random) * 0.005 * uFactor + sin(random) * m * random * 0.03;
     mPos.z += abs(sin(t * random));
     
     Pos = mPos;

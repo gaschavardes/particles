@@ -6,7 +6,7 @@ export default class TouchTexture {
 	constructor(parent) {
 		this.parent = parent;
 		this.size = 64;
-		this.maxAge = 100;
+		this.maxAge = 30;
 		this.radius = 0.1;
 		this.trail = [];
 
@@ -95,7 +95,7 @@ export default class TouchTexture {
 
 		this.ctx.beginPath();
 		this.ctx.fillStyle = grd;
-		this.ctx.arc(pos.x, this.canvas.height -pos.y, radius / (point.age * 0.05), 0, Math.PI * 2);
+		this.ctx.arc(pos.x - radius* 0.5, this.canvas.height -pos.y - radius* 0.5, radius / (point.age * 0.1), 0, Math.PI * 2);
 		this.ctx.fill();
 	}
 }

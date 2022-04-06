@@ -19,7 +19,7 @@ import vertex from '@/static/shaders/vertex.vert'
 
 //import RugbyText from '@/static/images/rugbyText.png'
 import Toulouse from '@/static/images/logo.png'
-import Bristol from '@/static/images/bristol.png'
+import Bristol from '@/static/images/bristol1.png'
 import bristolAlpha from '@/static/images/bristolAlpha.png'
 
 const vertexNull = /* glsl */ `
@@ -152,7 +152,7 @@ export default {
         this.offsets[j * 3 + 1] = Math.floor(i / this.width)/this.height;
         // console.log(i, (i % this.width), Math.floor(i / this.width))
         this.indices[j] = j;
-        this.angles[j] = Math.random() * Math.PI ;
+        this.angles[j] = Math.random() * 2 * Math.PI ;
         j++;
       };
 		}
@@ -171,6 +171,8 @@ export default {
           random: { instance: 1, size: 1, data: this.angles },
           index: { instance: 1, size: 1, data: this.indices },
       });
+      
+      
       const program = new Program(this.Scene.gl, {
           vertex,
           fragment,
@@ -179,7 +181,7 @@ export default {
               uWay: { value: way },
               uColor: { value:name === 'bristol' ? new Vec3(0, 0, 1) : new Vec3(1, 0, 0) },
               uFactor: {value: 1},
-              uTextureSize: { value: new Vec2(this.width, this.height) },
+              uTextureSize: { value: new Vec2(this.width / window.innerWidth ,  this.height/window.innerHeight) },
               uTouch: { value: null },
           },
           transparent: true,
