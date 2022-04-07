@@ -18,7 +18,8 @@ export default class TouchTexture {
 	initTexture() {
 		this.canvas = document.createElement('canvas');
         document.documentElement.appendChild(this.canvas)
-		this.canvas.width = this.canvas.height = this.size;
+		this.canvas.width =  this.size;
+		this.canvas.height = this.size 
 		
 		this.ctx = this.canvas.getContext('2d');
 		this.ctx.fillStyle = 'black';
@@ -33,6 +34,7 @@ export default class TouchTexture {
 
     move(){
         this.addTouch(Mouse.cursor)
+		console.log(Mouse.cursor[0], Mouse.cursor[1])
     }
 
 	update(delta) {
