@@ -127,7 +127,7 @@ class Scene {
 
   update () {
     this.time++
-    // this.controls.update()
+    this.controls.update()
     this.renderer.render({
       scene: this.scene,
       camera: this.camera

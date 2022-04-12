@@ -78,7 +78,7 @@ export default {
           this.hoverTexture = new Cursor(this)
           console.log('glgl', this.Scene.gl)
           this.initNull()
-          this.initPoints('toulouse', 1)
+          this.initPoints('bristol', 1)
           this.initPoints('toulouse', -1)
         })
       })
@@ -182,7 +182,7 @@ export default {
               uWay: { value: way },
               uColor: { value:name === 'bristol' ? new Vec3(0, 0, 1) : new Vec3(1, 0, 0) },
               uFactor: {value: 1},
-              uTextureSize: { value: new Vec2(this.width , this.height) },
+               uTextureSize: { value: new Vec2(this.width / window.innerWidth ,  this.height/window.innerHeight) },
               uTouch: { value: null },
           },
           transparent: true,

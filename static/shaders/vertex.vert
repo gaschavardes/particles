@@ -30,7 +30,7 @@ void main() {
     vec2 puv = vec2((offsets.x + uWay * 0.2), offsets.y);
 
     // add some movement in world space
-    puv = (puv - 0.5) * 0.5 + 0.5;
+    // puv = (puv - 0.5) * 0.5 + 0.5;
     float m = texture2D(uTouch, puv).r;
 
     float t = uTime * 0.01;
