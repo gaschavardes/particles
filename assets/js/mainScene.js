@@ -47,7 +47,7 @@ class Scene {
     //   this.container.style.left = window.innerWidth * 0.5 + 'px'
     //   this.container.style.left = this.$el.getBoundingClientRect().x + this.$el.getBoundingClientRect().width * 0.5 + 'px'
     
-    this.gl.clearColor(1, 0, 0, 0)
+    this.gl.clearColor(0, 0, 0, 0)
     // console.log('FOV', this.gl.fovHeight)
     this.camera = new Camera(this.gl, {
       fov: 15
